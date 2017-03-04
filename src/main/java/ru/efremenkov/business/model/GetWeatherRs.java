@@ -1,5 +1,6 @@
 package ru.efremenkov.business.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * $Author$
  * $Revision$
  */
-public class GetWeatherRs {
+public class GetWeatherRs implements Serializable{
 
     public CC cc = new CC();
     public List<FCD> fcd = new ArrayList<>();
@@ -19,58 +20,58 @@ public class GetWeatherRs {
     public String hits;
     public String hit_limit;
 
-    public class CC {
+    public class CC implements Serializable{
         public String dt;
         public String station;
-        public Integer t;
-        public Integer tf;
-        public Integer p;
+        public Double t;
+        public Double tf;
+        public Double p;
         public String s;
-        public Integer ws;
-        public Integer uv;
+        public Double ws;
+        public Double uv;
         public String wn;
-        public Integer wd;
-        public Integer rh;
-        public Integer pr;
-        public Integer v;
-        public Integer dp;
-        public Integer pw;
+        public Double wd;
+        public Double rh;
+        public Double pr;
+        public Double v;
+        public Double dp;
+        public Double pw;
     }
-    public class FCD {
+    public class FCD implements Serializable{
         public String dt;
-        public Integer tn;
-        public Integer tx;
+        public Double tn;
+        public Double tx;
         public String s;
-        public Integer p;
-        public Integer ws;
+        public Double p;
+        public Double ws;
         public String wn;
-        public Integer wd;
-        public Integer rn;
-        public Integer rx;
-        public Integer px;
-        public Integer pn;
-        public Integer uv;
+        public Double wd;
+        public Double rn;
+        public Double rx;
+        public Double px;
+        public Double pn;
+        public Double uv;
         public String sr;
         public String ss;
-        public Integer dl;
+        public Double dl;
     }
-    public class FCH {
+    public class FCH implements Serializable{
         public String dt;
         public String dtu;
-        public Integer t;
-        public Integer tf;
+        public Double t;
+        public Double tf;
         public String s;
-        public Integer ws;
+        public Double ws;
         public String wn;
-        public Integer wв;
-        public Integer p;
-        public Integer dp;
-        public Integer pr;
-        public Integer rh;
-        public Integer uv;
+        public Double wв;
+        public Double p;
+        public Double dp;
+        public Double pr;
+        public Double rh;
+        public Double uv;
     }
-    public class LOC {
-        public Integer id;
+    public class LOC implements Serializable{
+        public Double id;
         public String lon;
         public String lat;
         public String tz;

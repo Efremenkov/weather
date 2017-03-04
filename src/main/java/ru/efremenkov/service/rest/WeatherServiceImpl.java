@@ -1,8 +1,8 @@
 package ru.efremenkov.service.rest;
 
 import ru.efremenkov.business.BusinessException;
+import ru.efremenkov.service.facade.CacheableWeatherClientImpl;
 import ru.efremenkov.service.facade.WeatherClient;
-import ru.efremenkov.service.facade.WeatherClientImpl;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -25,10 +25,9 @@ public class WeatherServiceImpl extends RestServiceBase implements WeatherServic
     @Path("/weather")
     public Response getWeather(@QueryParam("lon") String longitude,
                                @QueryParam("lat") String latitude) {
-
         try {
-            WeatherClient weatherClient = new WeatherClientImpl();
-        return responseWithOkStatus(weatherClient.getTemperature(longitude, latitude));
+            WeatherClient weatherClient = new CacheableWeatherClientImpl();
+            return responseWithOkStatus(weatherClient.getTemperature(longitude, latitude));
         }
         catch (BusinessException e) {
             return responseWithErrorStatus(e);

@@ -27,7 +27,6 @@ public abstract class ClientBase {
 
     private static final String MSG_RESPONSE_NULL = "Empty response for %s longitude and %s latitude";
     private static final String MSG_NO_RESPONSE = "No response for %s longitude and %s latitude";
-    private static final String UNKNOWN_KEY_RESPONSE = "Unknown key";
 
     public ClientBase(String authKey) {
         this.authKey = authKey;
@@ -35,14 +34,7 @@ public abstract class ClientBase {
         client = ClientBuilder.newClient();
     }
 
-    protected WebTarget getTarget() {
-        return client.target(serviceUri);
-    }
-
-    protected abstract String getFormat();
-
-    protected Response getResponse(final String longitude, final String latitude) throws
-                                                                                 BusinessException {
+    protected Response getResponse(final String longitude, final String latitude) throws BusinessException {
         try {
             Response response = getTarget()
                 .queryParam("lon", longitude)
@@ -53,13 +45,16 @@ public abstract class ClientBase {
             if ((response == null) || (response.getStatusInfo().getStatusCode() != Response.Status.OK.getStatusCode())) {
                 throw new BusinessException(String.format(MSG_RESPONSE_NULL, longitude, latitude));
             }
-            if (response.toString().equals("unknown key")) {
-                throw new BusinessException(UNKNOWN_KEY_RESPONSE);
-            }
             return response;
         }
         catch (ProcessingException e) {
             throw new BusinessException(String.format(MSG_NO_RESPONSE, longitude, latitude));
         }
     }
+
+    protected WebTarget getTarget() {
+        return client.target(serviceUri);
+    }
+
+    protected abstract String getFormat();
 }
