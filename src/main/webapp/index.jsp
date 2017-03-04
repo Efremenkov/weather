@@ -4,6 +4,19 @@
     <title>Weather</title>
   </head>
   <body>
-
+    <form name="Forml" action="http://localhost:8080/weather-1.0-SNAPSHOT/api/v1/weather">
+      Enter the coordinates
+      <table>
+        <tr>
+          <td><B>Latitude:</B></td>
+          <td><input type=textbox name="latitude" size="25" value=""></td>
+        </tr>
+        <tr>
+          <td><B>Longitude:</B></td>
+          <td><input type=textbox name="longitude" size="25" value=""></td>
+        </tr>
+      </table>
+      <input type="submit" value="Get Weather">
+    </form>
   </body>
 </html>
