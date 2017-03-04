@@ -8,12 +8,12 @@
       Enter the coordinates
       <table>
         <tr>
-          <td><B>Latitude:</B></td>
-          <td><input type=textbox name="latitude" size="25" value=""></td>
+          <td><B>Longitude:</B></td>
+          <td><input type=textbox name="lon" size="25" value=""></td>
         </tr>
         <tr>
-          <td><B>Longitude:</B></td>
-          <td><input type=textbox name="longitude" size="25" value=""></td>
+          <td><B>Latitude:</B></td>
+          <td><input type=textbox name="lat" size="25" value=""></td>
         </tr>
       </table>
       <input type="submit" value="Get Weather">
