@@ -6,7 +6,7 @@
     <script src="lib/inputmask.js"></script>
   </head>
   <body>
-      Configurate cache:
+      Configure cache:
       <table>
         <tr>
           <td>Heap size:</td>
@@ -30,7 +30,7 @@
           <td><input type="checkbox" class ="js-use-disk-cache" id="diskCache" name="diskCache" value=""></td>
         </tr>
       </table>
-      <a href="#" class ="js-cache">Configurate</a>
+      <a href="#" class ="js-cache">Configure</a>
       <br/><br/>
       Enter the coordinates:
       <table>
