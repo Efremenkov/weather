@@ -1,11 +1,8 @@
 package ru.efremenkov.service.facade;
 
 import org.ehcache.Cache;
-import org.ehcache.CacheManager;
-import org.glassfish.hk2.api.Factory;
 import ru.efremenkov.business.BusinessException;
 import ru.efremenkov.business.model.GetWeatherRs;
-import ru.efremenkov.config.cache.CacheManagerFactory;
 import ru.efremenkov.config.cache.Caches;
 import ru.efremenkov.service.client.JsonClient;
 
@@ -15,21 +12,16 @@ import ru.efremenkov.service.client.JsonClient;
  * $Author$
  * $Revision$
  */
-public class CacheableWeatherClientImpl implements WeatherClient {
-    private static CacheManager cacheManager;
+public class CacheableWeatherClientImpl extends CacheableClientImplBase implements WeatherClient {
     private JsonClient jsonClient;
 
     public CacheableWeatherClientImpl() {
-        if(cacheManager == null) {
-            Factory<CacheManager> cacheFactory = new CacheManagerFactory();
-            cacheManager = cacheFactory.provide();
-        }
         jsonClient = new JsonClient();
     }
 
     @Override
     public String getLocation(String longitude, String latitude) throws BusinessException {
-        Cache<String, GetWeatherRs> cache = cacheManager.getCache(Caches.WEATHER.toString(), String.class, GetWeatherRs.class);
+        Cache<String, GetWeatherRs> cache = getCache(Caches.WEATHER.toString(), GetWeatherRs.class);
         GetWeatherRs getWeatherRs = cache.get(getCacheKey(longitude, latitude));
         if(getWeatherRs == null) {
             getWeatherRs = jsonClient.getWeather(longitude, latitude);
@@ -42,7 +34,7 @@ public class CacheableWeatherClientImpl implements WeatherClient {
 
     @Override
     public String getTemperature(String longitude, String latitude) throws BusinessException {
-        Cache<String, GetWeatherRs> cache = cacheManager.getCache(Caches.WEATHER.toString(), String.class, GetWeatherRs.class);
+        Cache<String, GetWeatherRs> cache = getCache(Caches.WEATHER.toString(), GetWeatherRs.class);
         GetWeatherRs getWeatherRs = cache.get(getCacheKey(longitude, latitude));
         if(getWeatherRs == null) {
             getWeatherRs = jsonClient.getWeather(longitude, latitude);

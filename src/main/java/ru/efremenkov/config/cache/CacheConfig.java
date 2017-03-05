@@ -25,4 +25,13 @@ public class CacheConfig {
                 .offheap(10, MemoryUnit.MB))
             .withExpiry(timeToLiveExpiration(Duration.of(3, MINUTES)))
             .build();
+
+    public static CacheConfiguration<String, GetWeatherRs> WEATHER_DISK =
+        newCacheConfigurationBuilder(String.class, GetWeatherRs.class,
+            newResourcePoolsBuilder()
+                .heap(10, EntryUnit.ENTRIES)
+                .offheap(10, MemoryUnit.MB)
+                .disk(20, MemoryUnit.MB))
+            .withExpiry(timeToLiveExpiration(Duration.of(3, MINUTES)))
+            .build();
 }

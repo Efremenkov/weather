@@ -7,7 +7,8 @@ package ru.efremenkov.config.cache;
  * $Revision$
  */
 public enum Caches {
-    WEATHER("weather");
+    WEATHER("weather"),
+    WEATHER_DISK("weather-disk");
 
     private final String value;
 
