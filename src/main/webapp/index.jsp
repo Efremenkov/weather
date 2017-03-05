@@ -2,23 +2,25 @@
 <html>
   <head>
     <title>Weather</title>
-    <script src="jquery-3.1.1.min.js"></script>
+    <script src="lib/jquery-3.1.1.min.js"></script>
+    <script src="lib/inputmask.js"></script>
   </head>
   <body>
       Configurate cache:
       <table>
         <tr>
-          <td>HeapSize:</td>
-          <td><input type=textbox id="heapSize" name="heapSize" size="5" value="">&nbsp<label>entries</label></td>
+          <td>Heap size:</td>
+          <td><input type=textbox id="heapSize" name="heapSize" size="5" value="">&nbsp<label>
+              entries</label></td>
 
         </tr>
         <tr>
-          <td>OffheapSize:</td>
+          <td>Offheap size:</td>
           <td><input type=textbox id="offheapSize" name="offheapSize" size="5" value="">&nbsp<label>MB</label></td>
 
         </tr>
         <tr>
-          <td>DiskMemSize:</td>
+          <td>Disk size:</td>
           <td><input type=textbox id="diskMemSize" name="diskMemSize" size="5" value="">&nbsp<label>MB</label></td>
 
         </tr>
@@ -45,6 +47,13 @@
 
     <script>
         $(document).ready(function () {
+            var im = new Inputmask("9[9]");
+            im.mask($("input#heapSize"));
+            im.mask($("input#diskMemSize"));
+            im.mask($("input#offheapSize"));
+            im = new Inputmask("9[99]");
+            im.mask($("input#duration"))
+
             $(".js-weather").click(function(e)
             {
                 e.preventDefault();
@@ -70,6 +79,7 @@
 
                 return false;
             });
+
             $(".js-cache").click(function(e)
             {
                 e.preventDefault();
@@ -77,6 +87,14 @@
                 var offheapSize = $("input#offheapSize").val();
                 var diskMemSize = $("input#diskMemSize").val();
                 var duration = $("input#duration").val();
+                if(!heapSize.length || !offheapSize.length || !diskMemSize.length || !duration.length) {
+                    alert("Fill the form")
+                    return
+                }
+                if(offheapSize >= diskMemSize) {
+                    alert("Pool offheap must be smaller than pool disk")
+                    return
+                }
                 var data="<CacheConfigurationRq>"+
                         "<heapSize>"+heapSize+"</heapSize>"+
                         "<offheapSize>"+offheapSize+"</offheapSize>"+
