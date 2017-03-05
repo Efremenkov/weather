@@ -12,22 +12,22 @@
           <td>Heap size:</td>
           <td><input type=textbox id="heapSize" name="heapSize" size="5" value="">&nbsp<label>
               entries</label></td>
-
         </tr>
         <tr>
           <td>Offheap size:</td>
           <td><input type=textbox id="offheapSize" name="offheapSize" size="5" value="">&nbsp<label>MB</label></td>
-
         </tr>
         <tr>
           <td>Disk size:</td>
           <td><input type=textbox id="diskMemSize" name="diskMemSize" size="5" value="">&nbsp<label>MB</label></td>
-
         </tr>
         <tr>
           <td>Duration:</td>
           <td><input type=textbox id="duration" name="duration" size="5" value="">&nbsp<label>minutes</label></td>
-
+        </tr>
+        <tr>
+          <td>Use disk cache:</td>
+          <td><input type="checkbox" class ="js-use-disk-cache" id="diskCache" name="diskCache" value=""></td>
         </tr>
       </table>
       <a href="#" class ="js-cache">Configurate</a>
@@ -123,6 +123,30 @@
 
                 return false;
             })
+
+            $(".js-use-disk-cache").click(function(e)
+            {
+                $.ajax({
+                    method: "GET",
+                    url: "/api/v1/cache/source/change",
+                })
+                    .done(function (response) {
+                        console.log("Get response", response)
+                        if($("#diskCache").is(":checked")) {
+                            $("#diskCache").prop('checked', false)
+                        } else {
+                            $("#diskCache").prop('checked', true)
+                        };
+                        return
+                    })
+                    .fail(function (error) {
+                            console.log("Response error", error)
+                            alert(error.responseJSON.message);
+                        }
+                    );
+
+                return false;
+            });
         });
     </script>
   </body>

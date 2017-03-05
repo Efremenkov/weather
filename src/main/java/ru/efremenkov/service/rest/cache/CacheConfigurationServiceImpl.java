@@ -28,7 +28,7 @@ public class CacheConfigurationServiceImpl extends RestServiceBase implements Ca
         CacheConfigurationServiceProcessor processor = new CacheConfigurationServiceProcessor();
         try {
             CacheConfigurationRq cacheConfigurationRq = request.getValue();
-            return responseWithOkStatus(processor.process(
+            return responseWithOkStatus(processor.processSettings(
                 cacheConfigurationRq.getHeapSize(),
                 cacheConfigurationRq.getOffheapSize(),
                 cacheConfigurationRq.getDiskMemSize(),
@@ -37,5 +37,14 @@ public class CacheConfigurationServiceImpl extends RestServiceBase implements Ca
         catch (BusinessException e) {
             return responseWithErrorStatus(e);
         }
+    }
+
+    @Override
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/source/change")
+    public Response changeCacheSource() {
+        CacheConfigurationServiceProcessor processor = new CacheConfigurationServiceProcessor();
+        return responseWithOkStatus(processor.processChangeSource());
     }
 }

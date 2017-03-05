@@ -2,9 +2,7 @@ package ru.efremenkov.service.facade;
 
 import org.ehcache.Cache;
 import org.ehcache.CacheManager;
-import org.glassfish.hk2.api.Factory;
 import ru.efremenkov.business.cache.CacheManagerKeeper;
-import ru.efremenkov.config.cache.CacheManagerFactory;
 
 /**
  * @author efremenkov

@@ -14,4 +14,6 @@ import javax.xml.bind.JAXBElement;
 public interface CacheConfigurationService {
 
     Response configure(JAXBElement<CacheConfigurationRq> request);
+
+    Response changeCacheSource();
 }
