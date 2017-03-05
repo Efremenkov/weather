@@ -44,6 +44,8 @@
         </tr>
       </table>
       <a href="#" class ="js-weather">Get weather</a>
+      <br/><br/>
+      <textarea id="weatherInfo" cols="80" rows="4"></textarea>
 
     <script>
         $(document).ready(function () {
@@ -59,6 +61,10 @@
                 e.preventDefault();
                 var lon = $("input#lon").val();
                 var lat = $("input#lat").val();
+                if(!lon.length || !lat.length) {
+                    alert("Enter coordinates")
+                    return
+                }
                 $.ajax({
                     method: "GET",
                     url: "/api/v1/weather",
@@ -69,7 +75,13 @@
                 })
                     .done(function (response) {
                         console.log("Get response", response)
-                            return
+                        $("textarea#weatherInfo").val(
+                            "In " + response.location + ", " + response.country +
+                            "\nmax temperature:  " + response.maxT +
+                            "\nmin temperature:  " + response.minT
+                        );
+
+                        return
                     })
                     .fail(function (error) {
                             console.log("Response error", error)
@@ -88,7 +100,7 @@
                 var diskMemSize = $("input#diskMemSize").val();
                 var duration = $("input#duration").val();
                 if(!heapSize.length || !offheapSize.length || !diskMemSize.length || !duration.length) {
-                    alert("Fill the form")
+                    alert("Enter all configurations parameters")
                     return
                 }
                 if(offheapSize >= diskMemSize) {
