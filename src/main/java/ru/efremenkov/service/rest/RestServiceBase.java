@@ -1,5 +1,7 @@
 package ru.efremenkov.service.rest;
 
+import ru.efremenkov.service.rest.weather.ErrorResponseMessage;
+
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Response;
 
@@ -20,9 +22,9 @@ public class RestServiceBase {
         return status(OK).cacheControl(cacheControl).entity(response).build();
     }
 
-    protected Response responseWithErrorStatus(Exception e) {
+    protected <E>Response responseWithErrorStatus(E response) {
         CacheControl cacheControl = new CacheControl();
         cacheControl.setNoCache(true);
-        return status(INTERNAL_SERVER_ERROR).cacheControl(cacheControl).build();
+        return status(INTERNAL_SERVER_ERROR).cacheControl(cacheControl).entity(response).build();
     }
 }

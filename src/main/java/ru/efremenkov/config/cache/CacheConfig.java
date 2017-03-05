@@ -18,20 +18,43 @@ import static org.ehcache.expiry.Expirations.timeToLiveExpiration;
  * $Revision$
  */
 public class CacheConfig {
-    public static CacheConfiguration<String, GetWeatherRs> WEATHER =
-        newCacheConfigurationBuilder(String.class, GetWeatherRs.class,
-            newResourcePoolsBuilder()
-                .heap(10, EntryUnit.ENTRIES)
-                .offheap(10, MemoryUnit.MB))
-            .withExpiry(timeToLiveExpiration(Duration.of(3, MINUTES)))
-            .build();
+    private static long duration = 3;
+    private static long heapSize = 10;
+    private static long offheapSize = 10;
+    private static long diskMemSize = 20;
 
-    public static CacheConfiguration<String, GetWeatherRs> WEATHER_DISK =
-        newCacheConfigurationBuilder(String.class, GetWeatherRs.class,
+    public static void setDuration(long duration) {
+        CacheConfig.duration = duration;
+    }
+
+    public static void setHeapSize(long heapSize) {
+        CacheConfig.heapSize = heapSize;
+    }
+
+    public static void setOffheapSize(long offheapSize) {
+        CacheConfig.offheapSize = offheapSize;
+    }
+
+    public static void setDiskMemSize(long diskMemSize) {
+        CacheConfig.diskMemSize = diskMemSize;
+    }
+
+    public static CacheConfiguration<String, GetWeatherRs> getWeatherCacheConfig() {
+        return newCacheConfigurationBuilder(String.class, GetWeatherRs.class,
             newResourcePoolsBuilder()
-                .heap(10, EntryUnit.ENTRIES)
-                .offheap(10, MemoryUnit.MB)
-                .disk(20, MemoryUnit.MB))
-            .withExpiry(timeToLiveExpiration(Duration.of(3, MINUTES)))
+                .heap(heapSize, EntryUnit.ENTRIES)
+                .offheap(offheapSize, MemoryUnit.MB))
+            .withExpiry(timeToLiveExpiration(Duration.of(duration, MINUTES)))
             .build();
+    }
+
+    public static CacheConfiguration<String, GetWeatherRs> getWeatherDiskCacheConfig() {
+        return newCacheConfigurationBuilder(String.class, GetWeatherRs.class,
+            newResourcePoolsBuilder()
+                .heap(heapSize, EntryUnit.ENTRIES)
+                .offheap(offheapSize, MemoryUnit.MB)
+                .disk(diskMemSize, MemoryUnit.MB))
+            .withExpiry(timeToLiveExpiration(Duration.of(duration, MINUTES)))
+            .build();
+    }
 }

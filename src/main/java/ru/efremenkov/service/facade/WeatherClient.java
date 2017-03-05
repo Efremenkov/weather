@@ -1,6 +1,7 @@
 package ru.efremenkov.service.facade;
 
 import ru.efremenkov.business.BusinessException;
+import ru.efremenkov.business.model.WeatherInfo;
 
 /**
  * @author efremenkov
@@ -10,7 +11,5 @@ import ru.efremenkov.business.BusinessException;
  */
 public interface WeatherClient {
 
-    String getLocation(final String longitude, final String latitude) throws BusinessException;
-
-    String getTemperature(final String longitude, final String latitude) throws BusinessException;
+    WeatherInfo getWeatherInfo(final String longitude, final String latitude) throws BusinessException;
 }

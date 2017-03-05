@@ -3,6 +3,7 @@ package ru.efremenkov.service.facade;
 import org.ehcache.Cache;
 import org.ehcache.CacheManager;
 import org.glassfish.hk2.api.Factory;
+import ru.efremenkov.business.cache.CacheManagerKeeper;
 import ru.efremenkov.config.cache.CacheManagerFactory;
 
 /**
@@ -12,14 +13,11 @@ import ru.efremenkov.config.cache.CacheManagerFactory;
  * $Revision$
  */
 public abstract class CacheableClientImplBase {
-    private static CacheManager cacheManager;
+    private CacheManager cacheManager;
     private static boolean useDiskCache = false;
 
     protected CacheableClientImplBase() {
-        if(cacheManager == null) {
-            Factory<CacheManager> cacheFactory = new CacheManagerFactory();
-            cacheManager = cacheFactory.provide();
-        }
+        cacheManager = CacheManagerKeeper.getCacheManager();
     }
 
     public static void changeCacheSource() {

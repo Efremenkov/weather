@@ -1,4 +1,4 @@
-package ru.efremenkov.service.rest;
+package ru.efremenkov.service.rest.weather;
 
 import javax.ws.rs.core.Response;
 
