@@ -20,7 +20,7 @@ public class GetWeatherRs implements Serializable{
     public String hits;
     public String hit_limit;
 
-    public class CC implements Serializable{
+    public class CC {
         public String dt;
         public String station;
         public Double t;
@@ -37,7 +37,7 @@ public class GetWeatherRs implements Serializable{
         public Double dp;
         public Double pw;
     }
-    public class FCD implements Serializable{
+    public class FCD {
         public String dt;
         public Double tn;
         public Double tx;
@@ -55,7 +55,7 @@ public class GetWeatherRs implements Serializable{
         public String ss;
         public Double dl;
     }
-    public class FCH implements Serializable{
+    public class FCH {
         public String dt;
         public String dtu;
         public Double t;
@@ -70,7 +70,7 @@ public class GetWeatherRs implements Serializable{
         public Double rh;
         public Double uv;
     }
-    public class LOC implements Serializable{
+    public class LOC {
         public Double id;
         public String lon;
         public String lat;

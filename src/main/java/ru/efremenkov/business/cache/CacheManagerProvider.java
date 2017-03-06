@@ -10,7 +10,7 @@ import ru.efremenkov.config.cache.CacheManagerFactory;
  * $Author$
  * $Revision$
  */
-public class CacheManagerKeeper {
+public class CacheManagerProvider {
     private static CacheManager cacheManager;
 
     public static CacheManager getCacheManager(){

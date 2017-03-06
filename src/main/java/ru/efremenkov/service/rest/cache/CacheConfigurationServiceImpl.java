@@ -1,9 +1,11 @@
 package ru.efremenkov.service.rest.cache;
 
+import com.google.gson.Gson;
 import ru.efremenkov.business.BusinessException;
 import ru.efremenkov.business.model.CacheConfigurationRq;
 import ru.efremenkov.service.rest.RestServiceBase;
 import ru.efremenkov.service.rest.cache.processors.CacheConfigurationServiceProcessor;
+import ru.efremenkov.service.rest.weather.ErrorResponseMessage;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -28,14 +30,15 @@ public class CacheConfigurationServiceImpl extends RestServiceBase implements Ca
         CacheConfigurationServiceProcessor processor = new CacheConfigurationServiceProcessor();
         try {
             CacheConfigurationRq cacheConfigurationRq = request.getValue();
-            return responseWithOkStatus(processor.processSettings(
+            return responseWithOkStatus(processor.processConfigure(
                 cacheConfigurationRq.getHeapSize(),
                 cacheConfigurationRq.getOffheapSize(),
                 cacheConfigurationRq.getDiskMemSize(),
                 cacheConfigurationRq.getDuration()));
         }
         catch (BusinessException e) {
-            return responseWithErrorStatus(e);
+            Gson gson = new Gson();
+            return responseWithErrorStatus(gson.toJson(new ErrorResponseMessage(e.getMessage())));
         }
     }
 

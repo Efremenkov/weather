@@ -10,8 +10,7 @@
       <table>
         <tr>
           <td>Heap size:</td>
-          <td><input type=textbox id="heapSize" name="heapSize" size="5" value="">&nbsp<label>
-              entries</label></td>
+          <td><input type=textbox id="heapSize" name="heapSize" size="5" value="">&nbsp<label>entries</label></td>
         </tr>
         <tr>
           <td>Offheap size:</td>
@@ -84,8 +83,8 @@
                         return
                     })
                     .fail(function (error) {
-                            console.log("Response error", error)
-                            alert(error.responseJSON.message);
+                        console.log("Response error", error)
+                        alert(error.responseJSON.message);
                         }
                     );
 
@@ -128,8 +127,8 @@
                         return
                     })
                     .fail(function (error) {
-                            console.log("Response error", error)
-                        alert(error.responseJSON.message);
+                        console.log("Response error", error)
+                        alert((jQuery.parseJSON(error.responseText)).message);
                         }
                     );
 
@@ -152,8 +151,7 @@
                         return
                     })
                     .fail(function (error) {
-                            console.log("Response error", error)
-                            alert(error.responseJSON.message);
+                        console.log("Response error", error)
                         }
                     );
 

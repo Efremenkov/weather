@@ -1,14 +1,16 @@
 package ru.efremenkov.business.model;
 
-import java.io.Serializable;
-
 /**
  * @author efremenkov
  * @ created 05.03.2017
  * $Author$
  * $Revision$
  */
-public class WeatherInfo implements Serializable {
+public class WeatherInfo {
+    private String country;
+    private String location;
+    private Double maxT;
+    private Double minT;
 
     public WeatherInfo(String country, String location, Double maxT, Double minT) {
         this.country = country;
@@ -17,8 +19,35 @@ public class WeatherInfo implements Serializable {
         this.minT = minT;
     }
 
-    public String country;
-    public String location;
-    public Double maxT;
-    public Double minT;
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Double getMaxT() {
+        return maxT;
+    }
+
+    public void setMaxT(Double maxT) {
+        this.maxT = maxT;
+    }
+
+    public Double getMinT() {
+        return minT;
+    }
+
+    public void setMinT(Double minT) {
+        this.minT = minT;
+    }
 }

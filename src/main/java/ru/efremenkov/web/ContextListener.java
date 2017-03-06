@@ -1,6 +1,6 @@
 package ru.efremenkov.web;
 
-import ru.efremenkov.business.cache.CacheManagerKeeper;
+import ru.efremenkov.business.cache.CacheManagerProvider;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -20,6 +20,6 @@ public class ContextListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        CacheManagerKeeper.shutdown();
+        CacheManagerProvider.shutdown();
     }
 }

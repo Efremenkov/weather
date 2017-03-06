@@ -1,7 +1,7 @@
 package ru.efremenkov.service.rest.cache.processors;
 
 import ru.efremenkov.business.BusinessException;
-import ru.efremenkov.business.cache.CacheManagerKeeper;
+import ru.efremenkov.business.cache.CacheManagerProvider;
 import ru.efremenkov.config.cache.CacheConfig;
 import ru.efremenkov.service.facade.CacheableClientImplBase;
 
@@ -13,9 +13,14 @@ import ru.efremenkov.service.facade.CacheableClientImplBase;
  */
 public class CacheConfigurationServiceProcessor {
 
-    public String processSettings(long heapSize, long offheapSize, long diskMemSize, long duration)
+    private static final String MSG_CONFIGURATION_ERROR = "Size must be greater than 0";
+
+    public String processConfigure(long heapSize, long offheapSize, long diskMemSize, long duration)
         throws BusinessException {
-        CacheManagerKeeper.shutdown();
+        if(heapSize == 0 || offheapSize == 0 || diskMemSize == 0) {
+            throw new BusinessException(MSG_CONFIGURATION_ERROR);
+        }
+        CacheManagerProvider.shutdown();
         CacheConfig.setHeapSize(heapSize);
         CacheConfig.setOffheapSize(offheapSize);
         CacheConfig.setDiskMemSize(diskMemSize);

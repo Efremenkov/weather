@@ -2,7 +2,7 @@ package ru.efremenkov.service.facade;
 
 import org.ehcache.Cache;
 import org.ehcache.CacheManager;
-import ru.efremenkov.business.cache.CacheManagerKeeper;
+import ru.efremenkov.business.cache.CacheManagerProvider;
 
 /**
  * @author efremenkov
@@ -15,7 +15,7 @@ public abstract class CacheableClientImplBase {
     private static boolean useDiskCache = false;
 
     protected CacheableClientImplBase() {
-        cacheManager = CacheManagerKeeper.getCacheManager();
+        cacheManager = CacheManagerProvider.getCacheManager();
     }
 
     public static void changeCacheSource() {

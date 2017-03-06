@@ -12,14 +12,4 @@ public class BusinessException extends Exception
     {
         super(message);
     }
-
-    public BusinessException(Throwable cause)
-    {
-        super(cause);
-    }
-
-    public BusinessException(String message, Throwable cause)
-    {
-        super(message, cause);
-    }
 }
